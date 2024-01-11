@@ -11,16 +11,25 @@ class OrgaosController extends Controller
 {
     public function index()
     {
-        $query = DB::table('orgaos')->select('*')->get();
+        try {
+            $query = DB::table('orgaos')->select('*')->get();
 
-        return response()->json(['data' => $query]);
+            return response()->json(['data' => $query]);
+
+        }catch(Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
+        }
     }
     public function store(Request $request)
     {
-        $response = Orgaos::create([
-            'descricao' => $request['descricao']
-        ]);
-        return response()->json(['data' => $response]);
+        try {
+            $response = Orgaos::create([
+                'descricao' => $request['descricao']
+            ]);
+            return response()->json(['data' => $response]);
+        }catch(Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
+        }
     }
     public function update(Request $request)
     {
