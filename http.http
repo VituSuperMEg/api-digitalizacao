@@ -1,0 +1,31 @@
+GET http://127.0.0.1:1001/api/tipos-documentos
+
+###
+POST http://127.0.0.1:1001/api/tipos-documentos
+Content-Type: application/json
+
+{
+    "descricao": "relatorio da gestao fiscal"
+}
+
+
+## Estante
+
+###
+GET http://127.0.0.1:1001/api/estantes
+
+###
+POST http://127.0.0.1:1001/api/estantes
+Content-Type: application/json
+
+{
+    "descricao" : "Estante 1"
+}
+
+###
+POST http://127.0.0.1:1001/api/estantes/1
+Content-Type: application/json
+
+{
+    "descricao" : "Estante 1"
+}
