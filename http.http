@@ -1,3 +1,18 @@
+
+GET http://127.0.0.1:1001/api/orgaos
+
+###
+POST http://127.0.0.1:1001/api/orgaos
+Content-Type: application/json
+
+{
+  "descricao" : "SAAE IGUATU"
+}
+
+
+## Tipo Documento
+
+###
 GET http://127.0.0.1:1001/api/tipos-documentos
 
 ###
@@ -19,7 +34,7 @@ POST http://127.0.0.1:1001/api/estantes
 Content-Type: application/json
 
 {
-    "descricao" : "Estante 1"
+    "descricao" : "Estante 3"
 }
 
 ###

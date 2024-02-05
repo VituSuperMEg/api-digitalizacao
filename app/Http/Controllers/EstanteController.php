@@ -60,4 +60,7 @@ class EstanteController extends Controller
             return response()->json(["erorr" => $e->getMessage()]);
         }
     }
+    public function delete ($id) {
+
+    }
 }
