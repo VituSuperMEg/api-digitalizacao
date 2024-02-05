@@ -24,7 +24,7 @@ class OrgaosController extends Controller
     {
         try {
             $response = Orgaos::create([
-                'descricao' => $request['descricao']
+                'descricao' => strtoupper($request['descricao'])
             ]);
             return response()->json(['data' => $response]);
         }catch(Exception $e) {

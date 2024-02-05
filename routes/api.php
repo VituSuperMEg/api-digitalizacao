@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EstanteController;
 use App\Http\Controllers\OrgaosController;
 use App\Http\Controllers\TiposDocumentosController;
 use Illuminate\Http\Request;
@@ -25,6 +26,12 @@ Route::post('/orgaos/update', [OrgaosController::class, 'update']);
 Route::delete('/orgaos/{id}', [OrgaosController::class, 'delete']);
 
 
-
+// Tipos do documentos
 Route::get('/tipos-documentos', [TiposDocumentosController::class, 'index']);
 Route::post('/tipos-documentos', [TiposDocumentosController::class, 'store']);
+
+
+// Estantes
+Route::get('/estantes', [EstanteController::class, 'index']);
+Route::post('/estantes', [EstanteController::class, 'store']);
+Route::post('/estantes/{id}', [EstanteController::class, 'update']);
