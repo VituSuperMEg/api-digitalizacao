@@ -20,15 +20,28 @@ class OrgaosController extends Controller
             return response()->json(['error' => $e->getMessage()]);
         }
     }
+    public function find($id) {
+      try {
+        $query = DB::table('orgaos')->select('*')->where('id', $id)->first();
+
+        return response()->json(['data' => $query]);
+
+      }catch(Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 300);
+        }
+    }
     public function store(Request $request)
     {
         try {
             $response = Orgaos::create([
-                'descricao' => strtoupper($request['descricao'])
+                'descricao' => strtoupper($request['descricao']),
+                'responsavel' => $request['responsavel'],
+                'cpf' => $request['cpf'],
+                'num_expediente' => $request['num_expediente'],
             ]);
-            return response()->json(['data' => $response]);
+            return response()->json(['success' => "Regristo Criado com Sucesso!"], 200);
         }catch(Exception $e) {
-            return response()->json(['error' => $e->getMessage()]);
+            return response()->json(['error' => $e->getMessage()], 300);
         }
     }
     public function update(Request $request)
@@ -57,8 +70,9 @@ class OrgaosController extends Controller
             $orgao->delete([
                 'id' => $id,
             ]);
+            return response()->json(['success' => "Regristo Excluído com Sucesso!"], 200);
         } catch (Exception $e) {
-            return response()->json(["msg" => $e->getMessage()]);
+            return response()->json(["msg" => $e->getMessage()], 300);
         }
     }
 }

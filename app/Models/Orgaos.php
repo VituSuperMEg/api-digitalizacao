@@ -11,6 +11,9 @@ class Orgaos extends Model
 
     protected $table = 'orgaos';
     protected $fillable =  [
-        'descricao'
+        'descricao',
+        'responsavel',
+        'cpf',
+        'num_expediente',
     ];
 }

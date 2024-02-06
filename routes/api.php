@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/orgaos', [OrgaosController::class, 'index']);
+Route::get('/orgaos/{id}', [OrgaosController::class, 'find']);
 Route::post('/orgaos', [OrgaosController::class, 'store']);
 Route::post('/orgaos/update', [OrgaosController::class, 'update']);
 Route::delete('/orgaos/{id}', [OrgaosController::class, 'delete']);
