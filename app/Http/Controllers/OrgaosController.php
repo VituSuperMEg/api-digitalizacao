@@ -12,7 +12,7 @@ class OrgaosController extends Controller
     public function index()
     {
         try {
-            $query = DB::table('orgaos')->select('*')->get();
+            $query = DB::table('orgaos')->select('*')->orderBy("id", "asc")->get();
 
             return response()->json(['data' => $query]);
 
@@ -22,7 +22,7 @@ class OrgaosController extends Controller
     }
     public function find($id) {
       try {
-        $query = DB::table('orgaos')->select('*')->where('id', $id)->first();
+        $query = DB::table('orgaos')->select('*')->where('id', $id)->get();
 
         return response()->json(['data' => $query]);
 
@@ -55,7 +55,7 @@ class OrgaosController extends Controller
             $orgao->update([
                 'descricao' => $request['descricao']
             ]);
-            return response()->json(['msg' => 'Registration updated']);
+            return response()->json(['success' => 'Registro Alterado com Sucesso!'], 200);
         } catch (Exception $e) {
             return response()->json(["msg" => $e->getMessage()]);
         }
