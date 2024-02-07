@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EstanteController;
 use App\Http\Controllers\OrgaosController;
+use App\Http\Controllers\SalasController;
 use App\Http\Controllers\SetorController;
 use App\Http\Controllers\TiposDocumentosController;
 use Illuminate\Http\Request;
@@ -33,6 +34,13 @@ Route::get('/setor/{id}', [SetorController::class, 'find']);
 Route::post('/setor', [SetorController::class, 'store']);
 Route::post('/setor/update', [SetorController::class, 'update']);
 Route::delete('/setor/{id}', [SetorController::class, 'delete']);
+
+// Salas
+Route::get('/salas', [SalasController::class, 'index']);
+Route::get('/salas/{id}', [SalasController::class, 'find']);
+Route::post('/salas', [SalasController::class, 'store']);
+Route::post('/salas/update', [SalasController::class, 'update']);
+Route::delete('/salas/{id}', [SalasController::class, 'delete']);
 
 // Tipos do documentos
 Route::get('/tipos-documentos', [TiposDocumentosController::class, 'index']);
