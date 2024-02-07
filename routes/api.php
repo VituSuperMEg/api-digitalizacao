@@ -57,5 +57,7 @@ Route::post('/tipos-documentos', [TiposDocumentosController::class, 'store']);
 
 // Estantes
 Route::get('/estantes', [EstanteController::class, 'index']);
+Route::get('/estantes/{id}', [EstanteController::class, 'find']);
 Route::post('/estantes', [EstanteController::class, 'store']);
-Route::post('/estantes/{id}', [EstanteController::class, 'update']);
+Route::post('/estantes/update', [EstanteController::class, 'update']);
+Route::delete('/caixas/{id}', [CaixasController::class, 'delete']);

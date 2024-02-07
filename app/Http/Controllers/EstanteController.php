@@ -40,27 +40,45 @@ class EstanteController extends Controller
             return response()->json(["erorr" => $e->getMessage()]);
         }
     }
-    public function update($id, Request $request)
-    {
-
+    public function find($id) {
         try {
+          $query = DB::table('estantes')->select('*')->where('id', $id)->get();
 
-            $find = $this->model->find($id);
+          return response()->json(['data' => $query]);
 
-            if (!$find) {
-                throw new Exception("Não foi possível localizar este registro");
+        }catch(Exception $e) {
+              return response()->json(['error' => $e->getMessage()], 300);
+          }
+      }
+      public function update(Request $request)
+      {
+          try {
+              $estante = Estante::find($request['id']);
+
+              if (!$estante) {
+                  throw new Exception('Não foi possível encontrada esse orgão!');
+              }
+              $estante->update([
+                  'descricao' => $request['descricao']
+              ]);
+              return response()->json(['success' => 'Registro Alterado com Sucesso!'], 200);
+          } catch (Exception $e) {
+              return response()->json(["msg" => $e->getMessage()]);
+          }
+      }
+    public function delete($id)
+    {
+        try {
+            $estante = Estante::find($id);
+            if(!$estante) {
+                throw new Exception("Não foi possível encontrada esse orgão!");
             }
-
-            $find->update([
-                "descricao" => strtoupper($request["descricao"]),
+            $estante->delete([
+                'id' => $id,
             ]);
-
-            return response()->json(["success" => "Registro alterado com sucesso"]);
+            return response()->json(['success' => "Regristo Excluído com Sucesso!"], 200);
         } catch (Exception $e) {
-            return response()->json(["erorr" => $e->getMessage()]);
+            return response()->json(["msg" => $e->getMessage()], 300);
         }
-    }
-    public function delete ($id) {
-
     }
 }
