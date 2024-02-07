@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EstanteController;
 use App\Http\Controllers\OrgaosController;
+use App\Http\Controllers\SetorController;
 use App\Http\Controllers\TiposDocumentosController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,12 @@ Route::post('/orgaos', [OrgaosController::class, 'store']);
 Route::post('/orgaos/update', [OrgaosController::class, 'update']);
 Route::delete('/orgaos/{id}', [OrgaosController::class, 'delete']);
 
+// Setor
+Route::get('/setor', [SetorController::class, 'index']);
+Route::get('/setor/{id}', [SetorController::class, 'find']);
+Route::post('/setor', [SetorController::class, 'store']);
+Route::post('/setor/update', [SetorController::class, 'update']);
+Route::delete('/setor/{id}', [SetorController::class, 'delete']);
 
 // Tipos do documentos
 Route::get('/tipos-documentos', [TiposDocumentosController::class, 'index']);
