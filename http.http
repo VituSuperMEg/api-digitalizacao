@@ -44,3 +44,30 @@ Content-Type: application/json
 {
     "descricao" : "Estante 1"
 }
+
+## Credores
+
+###
+GET http://127.0.0.1:1001/api/credores
+
+###
+POST http://127.0.0.1:1001/api/credores
+Content-Type: application/json
+
+
+{
+   "nome" : "Vitor",
+   "tipo_documento" : "cpf",
+   "cpf" : "01299945303",
+   "logradouro" : "Rua Padre Sá",
+   "numero" : "356",
+   "bairro" : "Centro",
+   "cidade" : "Cedro",
+   "cep" : "63400000",
+   "e-mail" : "vitor.itarget@gmail.com",
+   "telefone" : "88998554469",
+   "banco" : "nubank",
+   "agencia" : "10001",
+   "conta" : "101231",
+   "observacoes" : "Gosto muito de usar o sistema feito pelo vitor"
+}

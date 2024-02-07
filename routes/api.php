@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CaixasController;
+use App\Http\Controllers\CredoresController;
 use App\Http\Controllers\EstanteController;
 use App\Http\Controllers\OrgaosController;
 use App\Http\Controllers\SalasController;
@@ -23,6 +24,16 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Credores
+Route::get('/credores', [CredoresController::class, 'index']);
+Route::get('/credores/{id}', [CredoresController::class, 'find']);
+Route::post('/credores', [CredoresController::class, 'store']);
+Route::post('/credores/update', [CredoresController::class, 'update']);
+Route::delete('/credores/{id}', [CredoresController::class, 'delete']);
+
+
+// Orgoas
 Route::get('/orgaos', [OrgaosController::class, 'index']);
 Route::get('/orgaos/{id}', [OrgaosController::class, 'find']);
 Route::post('/orgaos', [OrgaosController::class, 'store']);
