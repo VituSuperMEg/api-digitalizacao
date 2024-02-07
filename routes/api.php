@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CaixasController;
 use App\Http\Controllers\EstanteController;
 use App\Http\Controllers\OrgaosController;
 use App\Http\Controllers\SalasController;
@@ -41,6 +42,13 @@ Route::get('/salas/{id}', [SalasController::class, 'find']);
 Route::post('/salas', [SalasController::class, 'store']);
 Route::post('/salas/update', [SalasController::class, 'update']);
 Route::delete('/salas/{id}', [SalasController::class, 'delete']);
+
+// Caixas
+Route::get('/caixas', [CaixasController::class, 'index']);
+Route::get('/caixas/{id}', [CaixasController::class, 'find']);
+Route::post('/caixas', [CaixasController::class, 'store']);
+Route::post('/caixas/update', [CaixasController::class, 'update']);
+Route::delete('/caixas/{id}', [CaixasController::class, 'delete']);
 
 // Tipos do documentos
 Route::get('/tipos-documentos', [TiposDocumentosController::class, 'index']);
