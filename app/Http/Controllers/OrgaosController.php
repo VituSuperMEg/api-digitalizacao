@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\AppUtil;
 use App\Models\Orgaos;
 use Exception;
 use Illuminate\Http\Request;
@@ -14,6 +15,13 @@ class OrgaosController extends Controller
         try {
             $query = DB::table('orgaos')->select('*')->orderBy("id", "asc")->get();
 
+
+            $result = array();
+
+            foreach($query as $q) {
+                $q->cpf = AppUtil::formataCnpjCpf($q->cpf);
+                array_push($result, $q);
+            }
             return response()->json(['data' => $query]);
 
         }catch(Exception $e) {
