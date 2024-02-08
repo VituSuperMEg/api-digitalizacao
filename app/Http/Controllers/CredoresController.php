@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\AppUtil;
 use App\Models\Credores;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -16,6 +17,14 @@ class CredoresController extends Controller
         try {
             $query = DB::table('credores')->select("*")->get();
 
+            $result = array();
+
+            foreach ($query as $q) {
+                $q->cpf = AppUtil::formataCnpjCpf($q->cpf);
+                $q->telefone = AppUtil::formataTelefone($q->telefone);
+
+                array_push($result, $q);
+            }
             return response()->json(["data" => $query]);
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
