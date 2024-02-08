@@ -45,7 +45,7 @@ class CredoresController extends Controller
                 "numero" => $request["numero"],
                 "bairro" => $request["bairro"],
                 "cep" => $request["cep"],
-                "e-mail" => $request["e-mail"],
+                "e-mail" => $request["email"],
                 "cidade" => $request["cidade"],
                 "telefone" => $request["telefone"],
                 "telefone_complementar" => $request["telefone_complementar"],
