@@ -13,7 +13,7 @@ class OrgaosController extends Controller
     public function index()
     {
         try {
-            $query = DB::table('orgaos')->select('*')->orderBy("id", "asc")->get();
+            $query = DB::table('orgaos')->select('*')->orderBy("id", "asc")->paginate(10);
 
 
             $result = array();

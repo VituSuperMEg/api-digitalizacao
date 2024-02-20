@@ -45,7 +45,7 @@ class CredoresController extends Controller
                 "numero" => $request["numero"],
                 "bairro" => $request["bairro"],
                 "cep" => $request["cep"],
-                "e-mail" => $request["email"],
+                "e-mail" => $request["e-mail"],
                 "cidade" => $request["cidade"],
                 "telefone" => $request["telefone"],
                 "telefone_complementar" => $request["telefone_complementar"],
@@ -59,4 +59,19 @@ class CredoresController extends Controller
             return response()->json(['error' => $e->getMessage()]);
         }
     }
+    public function find($id) {
+        try {
+          $query = DB::table('credores')->select('*')->where('id', $id)->get();
+
+          $result = array();
+          foreach ($query as $q) {
+            $q->email = $q->{'e-mail'};
+            array_push($result, $query);
+          }
+           return response()->json(['data' => $query]);
+
+        }catch(Exception $e) {
+              return response()->json(['error' => $e->getMessage()], 300);
+          }
+      }
 }
