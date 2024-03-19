@@ -1,3 +1,24 @@
+###
+POST http://127.0.0.1:1001/api/login
+Content-Type: application/json
+
+{
+  "login" : "root",
+  "password" : "123"
+}
+
+
+###
+POST http://127.0.0.1:1001/api/register
+Content-Type: application/json
+
+{
+  "nome" : "vitor",
+  "login" : "vitor",
+  "email" : "vitor.itarget@gmail.com",
+  "password" : "123"
+}
+
 
 GET http://127.0.0.1:1001/api/orgaos
 

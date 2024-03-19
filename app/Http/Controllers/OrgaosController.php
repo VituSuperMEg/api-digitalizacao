@@ -15,7 +15,6 @@ class OrgaosController extends Controller
         try {
             $query = DB::table('orgaos')->select('*')->orderBy("id", "asc")->paginate(10);
 
-
             $result = array();
 
             foreach($query as $q) {

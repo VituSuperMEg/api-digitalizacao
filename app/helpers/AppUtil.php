@@ -1,6 +1,7 @@
 <?php
 namespace App\Helpers;
 
+use Aws\S3\S3Client;
 use Illuminate\Support\Carbon;
 use Exception;
 
@@ -726,5 +727,46 @@ class AppUtil{
         }
         // empty
         return true;
+    }
+
+    public static function uploadS3($file) {
+        // Verifica se o arquivo é válido
+        if ($file->isValid()) {
+            // Configuração do S3
+            $s3 = new S3Client([
+                'version' => 'latest',
+                'region' => env('AWS_DEFAULT_REGION'),
+                'credentials' => [
+                    'key' => env('AWS_ACCESS_KEY_ID'),
+                    'secret' => env('AWS_SECRET_ACCESS_KEY'),
+                ],
+            ]);
+
+            // Nome do arquivo no S3 (pode ser modificado conforme necessário)
+            $fileName = time() . '_' . $file->getClientOriginalName();
+
+            // Caminho completo no bucket do S3
+            $filePath = $fileName;
+
+            // Faz o upload do arquivo para o S3
+            $result = $s3->putObject([
+                'Bucket' => env('AWS_BUCKET'),
+                'Key' => $filePath,
+                'Body' => fopen($file->getRealPath(), 'rb'),
+                'ACL' => 'public-read', // Defina as permissões adequadas
+            ]);
+
+            // Verifica se o upload foi bem-sucedido
+            if ($result['@metadata']['statusCode'] === 200) {
+                // Retorna o URL público do arquivo no S3
+                return $result['ObjectURL'];
+            } else {
+                // Caso ocorra algum erro durante o upload
+                return null;
+            }
+        } else {
+            // Caso o arquivo não seja válido
+            return null;
+        }
     }
 }

@@ -15,3 +15,5 @@ class Caixas extends Model
         "descricao"
     ];
 }
+
+

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CaixasController;
 use App\Http\Controllers\CredoresController;
 use App\Http\Controllers\EstanteController;
@@ -7,7 +8,10 @@ use App\Http\Controllers\OrgaosController;
 use App\Http\Controllers\SalasController;
 use App\Http\Controllers\SetorController;
 use App\Http\Controllers\TiposDocumentosController;
+use App\Http\Controllers\UploadController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,10 +25,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('/register', [UserController::class, 'register']);
 
+Route::post('/upload', [UploadController::class, 'upload']);
+
+
+Route::post('/login', [AuthController::class, 'login']);
 // Credores
 Route::get('/credores', [CredoresController::class, 'index']);
 Route::get('/credores/{id}', [CredoresController::class, 'find']);
