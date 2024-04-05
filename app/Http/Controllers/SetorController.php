@@ -12,7 +12,7 @@ class SetorController extends Controller
     public function index()
     {
         try {
-            $query = DB::table('setor')->select('*')->orderBy("id", "asc")->get();
+            $query = DB::table('setor')->select('*')->orderBy("id", "asc")->paginate(10);
 
             return response()->json(['data' => $query]);
 

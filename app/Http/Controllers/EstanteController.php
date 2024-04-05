@@ -19,7 +19,7 @@ class EstanteController extends Controller
     public function index()
     {
         try {
-            $query = DB::table("estantes")->select('*')->get();
+            $query = DB::table("estantes")->select('*')->paginate(10);
 
             return response()->json(["data" => $query]);
         } catch (Exception $e) {

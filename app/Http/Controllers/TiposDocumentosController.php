@@ -19,7 +19,7 @@ class TiposDocumentosController extends Controller
         try {
             $query = DB::table("tipo_documentos as td")
             ->select("*")
-            ->get();
+            ->paginate(10);
 
             return response()->json(["data" => $query]);
         }catch(Exception $e) {

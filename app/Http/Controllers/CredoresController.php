@@ -15,7 +15,7 @@ class CredoresController extends Controller
     public function index()
     {
         try {
-            $query = DB::table('credores')->select("*")->get();
+            $query = DB::table('credores')->select("*")->paginate(10);
 
             $result = array();
 

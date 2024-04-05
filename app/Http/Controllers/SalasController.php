@@ -13,7 +13,7 @@ class SalasController extends Controller
     public function index()
     {
         try {
-            $query = DB::table('salas')->select('*')->orderBy("id", "asc")->get();
+            $query = DB::table('salas')->select('*')->orderBy("id", "asc")->paginate(10);
 
             return response()->json(['data' => $query]);
 
