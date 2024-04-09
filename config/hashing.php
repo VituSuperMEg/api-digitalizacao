@@ -1,5 +1,7 @@
 <?php
-
+if(!defined('CLIENTE')) {
+    define('CLIENTE', '');
+}
 return [
 
     /*

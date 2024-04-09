@@ -77,7 +77,41 @@ return [
             'schema' => 'public',
             'sslmode' => 'prefer',
         ],
+        // Saae iguatu
+        '230550603' => [
+            'PORTAL' => true,
+            'GESTOR' => true,
+            'PONTO' => true,
+            'FOLHA' => false,
+            'FOLHA_ANTIGO' => false,
+            'entidade_id' => '76',
+            'cliente' => 'ce_iguatu_saae',
+            'driver' => 'pgsql',
+            'port' => env('DB_PORT', '5432'),
+            'username' => env('DB_USERNAME', 'postgres'),
+            'host' => env('DB_HOST', 'ipg04-13.aws.itarget.com.br'),
+            'database' => env('DB_DATABASE', 'ifolhawebdbsaaeiguatu'),
+            'password' => env('DB_PASSWORD', 'S551bp7fRs4qRCWx2M5y'),
+            // 'host' => 'localhost',
+            // 'database' => 'iraucuba',
+            // 'password' => '123456',
 
+            'charset' => 'utf8',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'schema' => 'public',
+            'sslmode' => 'prefer',
+
+            // Ponto
+            'report_path' => '/mnt/data/itarget.com.br/services/rh247_backend/data/reports',
+            'url_report_service' => 'http://iweb08.aws.itarget.com.br:8080/reportService_v7/ReportViewer',
+            'cod_report_service' => 'ed46d6b0669ff7',
+            // Folha
+            'report_path_folha' => '/mnt/data/itarget.com.br/services/rh247_backend/data/reports',
+            'url_report_service_folha' => 'http://iweb08.aws.itarget.com.br:8080/reportService_v7/ReportViewer',
+            'cod_report_service_folha' => 'ed46d6b0669ff7',
+            'options'  => [PDO::ATTR_CASE => PDO::CASE_LOWER]
+        ],
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'url' => env('DATABASE_URL'),
