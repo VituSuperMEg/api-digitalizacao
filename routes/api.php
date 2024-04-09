@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CaixasController;
 use App\Http\Controllers\CredoresController;
+use App\Http\Controllers\EntidadesController;
 use App\Http\Controllers\EstanteController;
 use App\Http\Controllers\OrgaosController;
 use App\Http\Controllers\SalasController;
@@ -28,6 +29,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('api')->get('/user', function (Request $request) {
     return $request->user();
 });
+// Entidade Inicial
+Route::get('/estados', [EntidadesController::class, 'getEstados']);
+Route::post('/estados/cidades', [EntidadesController::class, 'postMunicipios']);
+Route::post('/estados/cidades/entidades', [EntidadesController::class, 'postEntidades']);
+Route::get('/estados/cidades/entidades/{entidade}', [EntidadesController::class, 'getEntidade']);
+
 Route::post('/register', [UserController::class, 'register']);
 
 Route::post('/upload', [UploadController::class, 'upload']);
@@ -40,7 +47,6 @@ Route::get('/credores/{id}', [CredoresController::class, 'find']);
 Route::post('/credores', [CredoresController::class, 'store']);
 Route::post('/credores/update', [CredoresController::class, 'update']);
 Route::delete('/credores/{id}', [CredoresController::class, 'delete']);
-
 
 // Orgoas
 Route::get('/orgaos', [OrgaosController::class, 'index']);

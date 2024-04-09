@@ -16,14 +16,14 @@ class EntidadesController extends Controller
         if($list){
             foreach($list as $key => $value){
                 $identificador = explode('.', $key);
-                $lista_estados[] = ['id' => $identificador[1], 'name' => $value];
+                $lista_estados[] = ['value' => $identificador[1], 'label' => $value];
             }
         }
         sort($lista_estados);
 
         return response()->json(['data' => $lista_estados]);
     }
-    public function postMunicipios(){
+    public function postMunicipios(Request $request){
         $request = request()->input();
         $estado_id = $request['estado_id'];
         $list = config('clientes.municipios');
@@ -32,7 +32,7 @@ class EntidadesController extends Controller
             foreach($list as $key => $value){
                 $identificador = explode('.', $key);
                 if($estado_id === $identificador[1]){
-                    $lista_municipios[] = ['id' => $identificador[2], 'name' => $value];
+                    $lista_municipios[] = ['value' => $identificador[2], 'label' => $value];
                 }
             }
         }
@@ -48,15 +48,14 @@ class EntidadesController extends Controller
             foreach($list as $key => $value){
                 $identificador = explode('.', $key);
                 if($entidade_id === $identificador[2]){
-                    $lista_entidades[] = ['id' => $identificador[2].$identificador[3], 'name' => $value];;
+                    $lista_entidades[] = ['value' => $identificador[2].$identificador[3], 'label' => $value];;
                 }
             }
         }
         sort($lista_entidades);
         return response()->json(['data' => $lista_entidades]);
     }
-    public function getEntidade(){
-        $request = request()->input();
+    public function getEntidade(Request $request){
         $cliente = $request['entidade'];
         try {
             // if(!isset($cliente) || empty($cliente) || $cliente == 'null') {
