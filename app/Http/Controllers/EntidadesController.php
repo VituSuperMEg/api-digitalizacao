@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Entidades;
+use App\Models\Entidades;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
