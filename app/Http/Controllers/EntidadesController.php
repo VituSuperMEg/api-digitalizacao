@@ -58,9 +58,7 @@ class EntidadesController extends Controller
     public function getEntidade(Request $request){
         $cliente = $request['entidade'];
         try {
-            // if(!isset($cliente) || empty($cliente) || $cliente == 'null') {
-            //     throw new Exception("Selecione uma entidade");
-            // }
+
             $cod_estado = substr($cliente, 0, strlen($cliente) - 7);
             $cod_municipio = substr($cliente, 0, strlen($cliente) - 2);
             $cod_entidade =  substr($cliente, strlen($cliente) - 2, strlen($cliente));
@@ -74,27 +72,34 @@ class EntidadesController extends Controller
             $entidade = $entidades['entidades.'.$cod_estado.'.'.$cod_municipio.'.'.$cod_entidade];
 
             $entidade_id = config("database.connections.{$request['entidade']}.entidade_id");
+
             DB::setDefaultConnection($request['entidade']);
+
             $resultEntidade = Entidades::find($entidade_id);
-        } catch(Exception $e) {
-            return response()->json(['message' => 'Cliente ainda não disponível/configurado!. '.$e->getMessage()]);
-        }
 
-        $razao_social = '';
-        if($resultEntidade) {
-            $razao_social = $resultEntidade->razao_social;
-        } else {
+            if (!$resultEntidade) {
+                throw new Exception("Não foi possível recuperar a entidade do banco de dados.");
+            }
             $razao_social = '';
+            if($resultEntidade) {
+                $razao_social = $resultEntidade->razao_social;
+            } else {
+                $razao_social = '';
+            }
+
+            $data = [
+                'estado' => $estado ? $estado : '',
+                'municipio' => $municipio ? $municipio : '',
+                'entidade' => $razao_social,
+                'entidade_id' => $entidade_id,
+            ];
+
+            return response()->json(['data' => $data], 200);
+
+        } catch(Exception $e) {
+            return response()->json(['error' => 'Cliente ainda não disponível/configurado!. '.$e->getMessage()]);
         }
 
-        $data = [
-            'estado' => $estado ? $estado : '',
-            'municipio' => $municipio ? $municipio : '',
-            'entidade' => $razao_social,
-            'entidade_id' => $entidade_id,
-        ];
-
-        return response()->json(['data' => $data], 200);
     }
     public function getCheckCliente(){
         $request = request()->input();

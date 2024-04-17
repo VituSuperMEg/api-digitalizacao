@@ -5,6 +5,7 @@ use App\Http\Controllers\CaixasController;
 use App\Http\Controllers\CredoresController;
 use App\Http\Controllers\EntidadesController;
 use App\Http\Controllers\EstanteController;
+use App\Http\Controllers\MunicipiosController;
 use App\Http\Controllers\OrgaosController;
 use App\Http\Controllers\SalasController;
 use App\Http\Controllers\SetorController;
@@ -26,21 +27,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Auth
+Route::middleware('api')->post('/login', [AuthController::class, 'login']);
+
+
+
+
 // Entidade Inicial
 Route::get('/estados', [EntidadesController::class, 'getEstados']);
 Route::post('/estados/cidades', [EntidadesController::class, 'postMunicipios']);
 Route::post('/estados/cidades/entidades', [EntidadesController::class, 'postEntidades']);
-Route::get('/estados/cidades/entidades/{entidade}', [EntidadesController::class, 'getEntidade']);
+Route::get('entidades/{entidade}', [EntidadesController::class, 'getEntidade']);
 
+// Municipios
+Route::get('/municipios7/{cod}', [MunicipiosController::class, 'obterMunicipioPorCodIbge']);
 Route::post('/register', [UserController::class, 'register']);
 
 Route::post('/upload', [UploadController::class, 'upload']);
 
 
-Route::post('/login', [AuthController::class, 'login']);
+
 // Credores
 Route::get('/credores', [CredoresController::class, 'index']);
 Route::get('/credores/{id}', [CredoresController::class, 'find']);

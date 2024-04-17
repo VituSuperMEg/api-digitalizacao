@@ -2,18 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject
+class AclUsuarios extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
+    CONST STATUS_ONLINE = 'online';
+    CONST STATUS_AUSENTE = 'ausente';
+    CONST STATUS_OCUPADO = 'ocupado';
+    CONST STATUS_OFFLINE = 'offline';
 
     /**
      * The table associated with the model.
@@ -43,14 +45,13 @@ class User extends Authenticatable implements JWTSubject
         "criado_em",
         "alterado_em",
     ];
-
-    /**
+     /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
      */
     protected $hidden = [
-        'senha',
+        'password',
         'remember_token',
     ];
 
@@ -83,6 +84,7 @@ class User extends Authenticatable implements JWTSubject
     }
     public function getDecryptedPassword()
     {
-        return decrypt($this->password);
+        return decrypt($this->senha);
     }
 }
+
