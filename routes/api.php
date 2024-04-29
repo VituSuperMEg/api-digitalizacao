@@ -85,6 +85,7 @@ Route::delete('/caixas/{id}', [CaixasController::class, 'delete']);
 // Tipos do documentos
 Route::get('/tipos-documentos', [TiposDocumentosController::class, 'index']);
 Route::post('/tipos-documentos', [TiposDocumentosController::class, 'store']);
+Route::get('/tipos-documentos/list-options/{descricao}', [TiposDocumentosController::class, 'listOptions']);
 
 
 // Estantes
